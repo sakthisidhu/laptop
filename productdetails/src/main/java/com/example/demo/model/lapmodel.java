@@ -5,7 +5,7 @@ package com.example.demo.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-
+ 
 @Entity
 
 public class lapmodel {
@@ -39,6 +39,7 @@ public class lapmodel {
 		this.laptopstorage = laptopstorage;
 	}
 }
+
 	
 	
 	

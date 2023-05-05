@@ -1,6 +1,7 @@
 package com.example.demo.control;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+ 
 import com.example.demo.model.lapmodel;
 import com.example.demo.service.lapservice;
 
@@ -25,10 +26,10 @@ public class controler {
 	{
 		return pserve.Saveinfo(lm);
 	}
-	@GetMapping("/getpk")
-	public List<lapmodel> getDetails()
+	@GetMapping("/getpk/{pid}")
+	public Optional<lapmodel> getDetails(@PathVariable int pid)
 	{
-		return pserve.getInfo();
+		return pserve.getInfo(pid);
 	}
 	@PutMapping("/updatepk")
 	public lapmodel updateDetails(@RequestBody lapmodel id)
@@ -47,4 +48,26 @@ public class controler {
 		pserve.deleteInfo(playerId);
 		return "playerId "+playerId+" is deleted";
 	}
-}
+	@GetMapping("/sortDesc/{playername}")
+	public List<lapmodel>sortplayer(@PathVariable("playername")String pname)
+	{
+		return pserve.sortDesc(pname);
+	}
+	@GetMapping("/sortDesc1/{playername}")
+	public List<lapmodel>sortplayer1(@PathVariable("playername")String pname)
+	{
+		return pserve.sortDesc1(pname);
+	}
+	@GetMapping("/pagination/{pid}/{height}")
+	public List<lapmodel>paginationData(@PathVariable("pid")int playerId,@PathVariable("height")int height)
+	{
+		return pserve.paginationData(playerId,height);
+	}
+	@GetMapping("/pag/{nu}/{siz}/{name}")
+	public List<lapmodel>pagina(@PathVariable("nu")int nu,@PathVariable("siz")int siz,@PathVariable("name")String name)
+	{
+		return pserve.paginationAndSorting(nu,siz,name);
+	}
+} 
+
+
